@@ -1,0 +1,16 @@
+
+<div class="w-100 h-100 d-flex justify-content-center align-items-center p-20">
+  <form class="">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Type your username</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+    
+      <a class="btn btn-primary" routerLink="contacts" [ngClass]="{active:menuOption == 'contacts'}" (click)="onOption('contacts')">Submit</a>
+    </form>
+</div>
