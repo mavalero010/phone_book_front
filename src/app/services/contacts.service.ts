@@ -1,13 +1,20 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { AdditionalField } from '../interfaces/additionalfield.interface';
 import { ContactType } from '../interfaces/contactType.interface';
 import { Contact } from '../interfaces/contact.interface';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactsService {
+
+  httpOptions : {} ={}
+  constructor(private _router: Router) { }
+  
+  
   deleteContact() {
     console.log("delete service");
     
@@ -96,14 +103,50 @@ export class ContactsService {
  public _baseurl = "http://localhost:5173"
 
 
- get(){
-  this._http.get(`${this._baseurl}/contact/get/OrgInc_`).subscribe(
-    (response: any) => {
-      console.log('Respuesta:', response);
-    },
-    (error: any) => {
-      console.error('Error:', error);
-    }
-  );
+ login(username: string, password : string){
+  if(username !== null && password !== null){
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    this._http.post(`${this._baseurl}/user/login/${username}/${password}`,{}).subscribe(
+      (response: any) => {
+        if(response!==undefined && response!==null ){
+          localStorage.setItem('user', JSON.stringify(response));
+          this._router.navigate(['/contacts']);    
+          
+        }
+        else{
+        }
+      },
+      (error: any) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+ }
+
+ getAllContacts(contactNames : []){
+  let ctcs : any = localStorage.getItem("contacts");
+  if(ctcs == null){
+    this._http.get(`${this._baseurl}/contact/getall/`).subscribe(
+      (response: any) => {
+        if(response!==undefined){
+          ctcs = localStorage.setItem('contacts', JSON.stringify(response));
+          return localStorage.getItem("contacts");
+
+        }
+        else{
+          return [];
+        }
+      },
+      (error: any) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+  return ctcs
  }
 }

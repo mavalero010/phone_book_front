@@ -3,18 +3,32 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ContactsService } from '../../services/contacts.service';
 import { Contact } from '../../interfaces/contact.interface';
+import { AddContactModalComponent } from '../add-contact-modal/add-contact-modal.component'
 
 @Component({
-  selector: 'app-contactlist',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './contactlist.component.html',
-  styleUrl: './contactlist.component.css',
+    selector: 'app-contactlist',
+    standalone: true,
+    templateUrl: './contactlist.component.html',
+    styleUrl: './contactlist.component.css',
+    imports: [CommonModule, FormsModule, AddContactModalComponent]
 })
 export class ContactlistComponent implements OnInit {
-  ngOnInit(): void {}
 
-  public localStorageKey = 'contactlist'; //add constructor; call and inject services
+  user: {} = {};
+  userFromLocalStorage: any = localStorage.getItem('user');
+  contactsFromLocalStorage: any = localStorage.getItem('contacts');
+
+  ngOnInit(): void {
+    if (this.userFromLocalStorage) {
+      this.user = JSON.parse(this.userFromLocalStorage);
+          
+    }
+    if (this.contactsFromLocalStorage) {
+      this.cts = JSON.parse(this.contactsFromLocalStorage);
+      console.log(this.cts);
+      
+    }
+  }
 
   private _contactsservice = inject(ContactsService);
   af = this._contactsservice.af;
@@ -65,7 +79,6 @@ export class ContactlistComponent implements OnInit {
   }
 
   getEntriesValue(obj: any): any[] {
-    
     return Object.entries(obj);
   }
   getEntriesValuesContactType(obj: Contact): any[] {
@@ -74,13 +87,11 @@ export class ContactlistComponent implements OnInit {
     }
     return [];
   }
-  onSubmit(form: NgForm,m: Contact) {
+  onSubmit(form: NgForm, m: Contact) {
     if (form.valid) {
-      
     }
   }
 
-  
   getEntriesValuesAdditionalFields(obj: Contact): any[] {
     if (obj.AdditionalField) {
       return Object.entries(obj.AdditionalField);
@@ -92,18 +103,18 @@ export class ContactlistComponent implements OnInit {
   }
   getContacts(): string[] {
     return (
-      JSON.parse(localStorage.getItem(this.localStorageKey) as string) || []
+      JSON.parse(localStorage.getItem(this.userFromLocalStorage) as string) ||
+      []
     );
   }
   formatDate(dt: string) {
-    const date =dt.split("/");
-    return new Date(dt[0],);
+    const date = dt.split('/');
+    return new Date(dt[0]);
   }
 
   editContact(contact: any) {
     const keys = this.getObjectKeys(contact);
-    console.log(this._contactsservice.get());
-    
+
     this.modalInfo = contact;
     return this._contactsservice.editContact();
   }
@@ -112,4 +123,5 @@ export class ContactlistComponent implements OnInit {
     contacts.push(info.C);
     //Insert request to backend
   }
+
 }

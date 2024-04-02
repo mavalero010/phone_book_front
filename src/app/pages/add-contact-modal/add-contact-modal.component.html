@@ -1,0 +1,181 @@
+<div
+    class="modal fade"
+    id="contactModalUnique"
+    tabindex="-1"
+    aria-labelledby="contactModalLabelUnique"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="contactModalLabelUnique">
+            Add Contact
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="addContact(myForm)" #myForm="ngForm">
+            <div class="container mt-3">
+              <div class="row">
+                <div class="mb-3 col">
+                  <label class="form-label"><strong>Name:</strong></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="contactNameAdded"
+                    id="contactNameAdded"
+                    placeholder=""
+                    ngModel 
+                    required
+                  />
+                </div>
+                <div class="mb-3 col">
+                  <label class="form-label"><strong>Username:</strong></label>
+                  <input
+                    name="contactUsernameAdded"
+                    type="text"
+                    class="form-control"
+                    id="contactUsernameAdded"
+                    placeholder=""
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-3 col">
+                  <label class="form-label"><strong>Comments:</strong></label>
+                  <input
+                    name="contactCommentsadded"
+                    type="text"
+                    class="form-control"
+                    id="contactCommentsAdded"
+                    placeholder=""
+                    required
+                  />
+                </div>
+                <div class="mb-3 col">
+                  <label class="form-label"
+                    ><strong>Phone Number:</strong></label
+                  >
+                  <input
+                    name="contactPhonesadded"
+                    inputmode="numeric" pattern="[0-9]*" 
+                    type="tel"
+                    class="form-control"
+                    id="contactPhonesadded"
+                    placeholder=""
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="container mb-3">
+              <p><strong>Contact Type:</strong></p>
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic radio toggle button group"
+              >
+                <input
+                  type="radio"
+                  class="btn-check form-control"
+                  name="ContactType"
+                  id="ContactTypePerson"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-dark" for="ContactTypePerson"
+                  >Person</label
+                >
+
+                <input
+                  type="radio"
+                  class="btn-check form-control"
+                  name="ContactType"
+                  id="ContactTypePublicOrg"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-dark" for="ContactTypePublicOrg"
+                  >Public Org</label
+                >
+
+                <input
+                  type="radio"
+                  class="btn-check form-control"
+                  name="ContactType"
+                  id="ContactTypePrivateOrg"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-dark" for="ContactTypePrivateOrg"
+                  >Private Org</label
+                >
+              </div>
+            </div>
+            <div class="container mb-3 mt-3">
+              <div class="row">
+                <div class="col">
+                  <label for="nit"><strong>Nit:</strong></label>
+                  <input
+                    type="text"
+                    id="nit"
+                    name="nit"
+                    class="form-control"
+                    placeholder="Insert Nit"
+                  />
+                </div>
+                <div class="col">
+                  <label for="state"><strong>State:</strong></label>
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    class="form-control"
+                    placeholder="Insert State"
+                  />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <label for="birthday"><strong>Birthday:</strong></label>
+                  <input
+                    type="date"
+                    id="birthday"
+                    name="birthday"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col">
+                  <label for="foundation"><strong>Foundation:</strong></label>
+                  <input
+                    type="date"
+                    id="foundation"
+                    name="foundation"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="button"
+                class="btn btn-secondary me-3"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
