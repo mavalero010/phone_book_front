@@ -76,7 +76,7 @@
                 let i = index
               "
             >
-              <p *ngIf="i !== 0" class="mb-1">
+              <p *ngIf="i !== 0 && value[1]!=''" class="mb-1">
                 <strong>{{ value[0] }}:</strong> {{ value[1] }}
               </p>
             </div>
@@ -248,6 +248,6 @@
     </div>
   </div>
 
-  <app-add-contact-modal></app-add-contact-modal>
+  <app-add-contact-modal (contactList)="updateList($event)"></app-add-contact-modal>
   
 </div>

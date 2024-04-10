@@ -13,41 +13,26 @@ import { AddContactModalComponent } from '../add-contact-modal/add-contact-modal
     imports: [CommonModule, FormsModule, AddContactModalComponent]
 })
 export class ContactlistComponent implements OnInit {
-
-  user: {} = {};
-  userFromLocalStorage: any = localStorage.getItem('user');
-  contactsFromLocalStorage: any = localStorage.getItem('contacts');
+  
 
   ngOnInit(): void {
-    if (this.userFromLocalStorage) {
-      this.user = JSON.parse(this.userFromLocalStorage);
-          
-    }
-    if (this.contactsFromLocalStorage) {
-      this.cts = JSON.parse(this.contactsFromLocalStorage);
-      console.log(this.cts);
-      
-    }
+   this.cts = JSON.parse(localStorage.getItem("user") || "")
   }
 
   private _contactsservice = inject(ContactsService);
-  af = this._contactsservice.af;
   ctp = this._contactsservice.ctp;
-  cts = this._contactsservice.cts;
-
-  afwithdates = this.af.filter((a) => a.Birthday != null);
+  cts: Contact[] = JSON.parse(localStorage.getItem("user") || "")
 
   filteredContacts = this.cts.map((c) => {
     return {
       ...c,
-      AdditionalField: this.af.find((a) => a.FieldId == c.AdditionalFields),
-      ContactType: this.ctp.find((ci) => ci.ContactTypeId == c.ContactTypeId),
     };
   });
   modalInfo: Contact = this.cts[0];
   formatContacts = this.filteredContacts;
   selectedContactType = 'All';
-
+  
+  
   onContactTypeChange($event: Event) {
     if ($event.toString() !== 'All') {
       const ct = this.ctp.find(
@@ -79,6 +64,8 @@ export class ContactlistComponent implements OnInit {
   }
 
   getEntriesValue(obj: any): any[] {
+   
+
     return Object.entries(obj);
   }
   getEntriesValuesContactType(obj: Contact): any[] {
@@ -98,14 +85,16 @@ export class ContactlistComponent implements OnInit {
     }
     return [];
   }
-  deleteContact(contact: {}) {
-    return this._contactsservice.deleteContact();
+  deleteContact(contact: Contact) {
+    const contactList:Contact[]= JSON.parse(localStorage.getItem("user") || "{UserName:''}")
+    const filter = contactList.filter(c => c.UserName !== contact.UserName);
+    localStorage.setItem('user', JSON.stringify(filter))
+    this.filteredContacts = filter
+    console.log(filter);
+    
   }
   getContacts(): string[] {
-    return (
-      JSON.parse(localStorage.getItem(this.userFromLocalStorage) as string) ||
-      []
-    );
+    return [""]
   }
   formatDate(dt: string) {
     const date = dt.split('/');
@@ -123,5 +112,10 @@ export class ContactlistComponent implements OnInit {
     contacts.push(info.C);
     //Insert request to backend
   }
+
+  updateList($event: Event) {
+   console.log("EVENTE: ",$event);
+   this.filteredContacts = JSON.parse(JSON.stringify($event))
+    }
 
 }
