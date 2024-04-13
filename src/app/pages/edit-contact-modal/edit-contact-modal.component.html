@@ -1,0 +1,134 @@
+<div
+  class="modal fade"
+  id="editContactModal"
+  tabindex="-1"
+  aria-labelledby="editContactModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editContactModalLabelUnique">Edit {{modalInfo.Name}} contact</h1>
+       
+      </div>
+      <div class="modal-body">  
+
+        <form (ngSubmit)="editContact(myEditContactForm, modalInfo)" #myEditContactForm="ngForm">
+            <div class="container mt-3">
+              <div class="row">
+                <div class="mb-3 col">
+                  <label class="form-label"><strong>Name:</strong></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="contactNameEdited"
+                    id="contactNameEdited"
+                    [(ngModel)]="modalInfo.Name"
+                    
+                    
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-3 col">
+                  <label class="form-label"><strong>Comments:</strong></label>
+                  <input
+                    name="contactCommentsEdited"
+                    type="text"
+                    class="form-control"
+                    id="contactCommentsEdited"
+                    placeholder=""
+                    [(ngModel)]="modalInfo.Comments"
+                    
+                    
+                  />
+                </div>
+                <div class="mb-3 col">
+                  <label class="form-label"><strong>Phone Number:</strong></label>
+                  <input
+                    name="contactPhonesEdited"
+                    inputmode="numeric"
+                    pattern="^[0-9]{10}$"
+                    type="number"
+                    class="form-control"
+                    id="contactPhonesEdited"
+                    [(ngModel)]="modalInfo.PhoneNumber"
+                    
+                    required 
+                  />
+                </div>
+              </div>
+            </div>
+
+  
+            <div class="container mt-3">
+              <div class="row">
+                <div class="mb-3 col">
+                  <label class="form-label"><strong>State:</strong></label>
+                  <input
+                    name="stateEdited"
+                    type="text"
+                    class="form-control"
+                    id="stateEdited"
+                    [placeholder]="modalInfo.AdditionalField?.State"
+                    
+                    [value]="modalInfo.AdditionalField?.State"
+                    ngModel
+                  />
+                </div>
+                <div class="col">
+                  <label class="form-label"><strong>Nit:</strong></label>
+                  <input
+                    name="nitEdited"
+                    type="text"
+                    class="form-control"
+                    id="nitEdited"
+                    [value]="modalInfo.AdditionalField?.Nit"
+                    ngModel
+                  />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <label class="form-label"><strong>Birthday:</strong></label>
+                  <input
+                    name="birthdayEdited"
+                    type="date"
+                    class="form-control"
+                    id="birthdayEdited"
+                    [value]="modalInfo.AdditionalField?.Birthday"
+                    ngModel
+                  />
+                </div>
+                
+                <div class="col mb-3">
+                  <label class="form-label"><strong>Foundation:</strong></label>
+                  <input
+                    name="foundationEdited"
+                    type="date"
+                    class="form-control"
+                    id="foundationEdited"
+                    [value]="modalInfo.AdditionalField?.Foundation"
+                    ngModel
+                  />
+                </div>
+              </div>
+            </div>
+  
+            <div class="container mt-3">
+              <button
+                #closemodaledit
+                type="button"
+                class="btn btn-secondary me-3"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

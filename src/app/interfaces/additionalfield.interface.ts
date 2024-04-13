@@ -1,5 +1,5 @@
 export interface AdditionalField {
-    FieldId?: number;
+    FieldId: number;
     State?: string;
     Birthday?: string,
     Foundation?: string,
