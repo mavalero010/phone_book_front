@@ -8,29 +8,27 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editContactModalLabelUnique">Edit {{modalInfo.Name}} contact</h1>
+        <h1 class="modal-title fs-5" id="editContactModalLabelUnique">Edit {{modalInf.Name}} contact</h1>
        
       </div>
       <div class="modal-body">  
 
-        <form (ngSubmit)="editContact(myEditContactForm, modalInfo)" #myEditContactForm="ngForm">
+        <form (ngSubmit)="editContact(myEditContactForm, modalInf)" #myEditContactForm="ngForm">
             <div class="container mt-3">
               <div class="row">
-                <div class="mb-3 col">
+                <div *ngIf="this.contacts[contactIndex]!==undefined" class="mb-3 col">
                   <label class="form-label"><strong>Name:</strong></label>
                   <input
                     type="text"
                     class="form-control"
                     name="contactNameEdited"
                     id="contactNameEdited"
-                    [(ngModel)]="modalInfo.Name"
-                    
-                    
+                    [(ngModel)]="this.contacts[contactIndex].Name"
                   />
                 </div>
               </div>
               <div class="row">
-                <div class="mb-3 col">
+                <div *ngIf="this.contacts[contactIndex]!==undefined" class="mb-3 col">
                   <label class="form-label"><strong>Comments:</strong></label>
                   <input
                     name="contactCommentsEdited"
@@ -38,12 +36,10 @@
                     class="form-control"
                     id="contactCommentsEdited"
                     placeholder=""
-                    [(ngModel)]="modalInfo.Comments"
-                    
-                    
+                    [(ngModel)]="this.contacts[contactIndex].Comments"
                   />
                 </div>
-                <div class="mb-3 col">
+                <div *ngIf="this.contacts[contactIndex]!==undefined" class="mb-3 col">
                   <label class="form-label"><strong>Phone Number:</strong></label>
                   <input
                     name="contactPhonesEdited"
@@ -52,7 +48,7 @@
                     type="number"
                     class="form-control"
                     id="contactPhonesEdited"
-                    [(ngModel)]="modalInfo.PhoneNumber"
+                    [(ngModel)]="this.contacts[contactIndex].PhoneNumber"
                     
                     required 
                   />
@@ -63,16 +59,16 @@
   
             <div class="container mt-3">
               <div class="row">
-                <div class="mb-3 col">
+                <div  class="mb-3 col">
                   <label class="form-label"><strong>State:</strong></label>
                   <input
                     name="stateEdited"
                     type="text"
                     class="form-control"
                     id="stateEdited"
-                    [placeholder]="modalInfo.AdditionalField?.State"
+                    [placeholder]="modalInf.AdditionalField?.State"
                     
-                    [value]="modalInfo.AdditionalField?.State"
+                    [value]="modalInf.AdditionalField?.State"
                     ngModel
                   />
                 </div>
@@ -83,7 +79,7 @@
                     type="text"
                     class="form-control"
                     id="nitEdited"
-                    [value]="modalInfo.AdditionalField?.Nit"
+                    [value]="modalInf.AdditionalField?.Nit"
                     ngModel
                   />
                 </div>
@@ -96,19 +92,19 @@
                     type="date"
                     class="form-control"
                     id="birthdayEdited"
-                    [value]="modalInfo.AdditionalField?.Birthday"
+                    [value]="modalInf.AdditionalField?.Birthday"
                     ngModel
                   />
                 </div>
                 
-                <div class="col mb-3">
+                <div  class="col mb-3">
                   <label class="form-label"><strong>Foundation:</strong></label>
                   <input
                     name="foundationEdited"
                     type="date"
                     class="form-control"
                     id="foundationEdited"
-                    [value]="modalInfo.AdditionalField?.Foundation"
+                    [value]="modalInf.AdditionalField?.Foundation"
                     ngModel
                   />
                 </div>
@@ -124,7 +120,9 @@
               >
                 Close
               </button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="submit" class="btn btn-primary" (click)="submitButtonClicked = true"
+              
+              >Save changes</button>
             </div>
           </form>
       </div>

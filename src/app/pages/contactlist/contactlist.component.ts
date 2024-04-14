@@ -31,6 +31,7 @@ export class ContactlistComponent implements OnInit {
     };
   });
   modalInfo: Contact = {Name:"",UserName:"",PhoneNumber:-1,Comments:"",AdditionalFields:-1};
+  contactIndex: number = 1
   formatContacts = this.filteredContacts;
   selectedContactType = 'All';
   
@@ -90,15 +91,9 @@ export class ContactlistComponent implements OnInit {
   
 
   editContact(contact: Contact) {
-    const contactList:Contact[]= JSON.parse(localStorage.getItem("user") || "{UserName:''}")
-
-    const filter = contactList.filter(c => c.UserName !== contact.UserName);
-    
-
-
     this.modalInfo = contact;
-    console.log("ello",this.modalInfo);
-    
+    let contacts : Contact[] = JSON.parse(localStorage.getItem("user") || "{}")
+    this.contactIndex = contacts.findIndex(c => c.UserName === contact.UserName);
     return this._contactsservice.editContact();
   }
  
@@ -106,6 +101,6 @@ export class ContactlistComponent implements OnInit {
   updateList($event: Event) {
    this.filteredContacts = JSON.parse(JSON.stringify($event))
    this.formatContacts = this.filteredContacts
-    }
+  }
 
 }

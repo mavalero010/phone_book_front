@@ -14,7 +14,7 @@ import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-m
 export class AddContactModalComponent {
   constructor(private _router: Router) {}
   contact : Contact = {Name:"",UserName:"",Comments:"",PhoneNumber:-1,AdditionalFields:-1}
-  @ViewChild('closemodaledit') closemodal!: ElementRef;
+  @ViewChild('closemodal') closemodal!: ElementRef;
   @Output() contactList = new EventEmitter<any>();
   contactType: string = "Person";
  

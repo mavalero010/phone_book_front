@@ -134,7 +134,7 @@
     </div>
   </div>
 
-  <app-edit-contact-modal [modalInfo]="modalInfo" ></app-edit-contact-modal>
+  <app-edit-contact-modal (editContacts)="updateList($event)" [contactIndex]="contactIndex" [modalInf]="modalInfo" ></app-edit-contact-modal>
   <app-add-contact-modal (contactList)="updateList($event)"></app-add-contact-modal>
 
 
